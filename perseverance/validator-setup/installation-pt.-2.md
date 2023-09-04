@@ -14,9 +14,14 @@ sudo systemctl start chainflip-node
 
 To check on the service, we use `status`.
 
-```bash
-systemctl status chainflip-node
-```
+<pre class="language-bash"><code class="lang-bash"><strong>sudo systemctl status chainflip-node
+</strong></code></pre>
+
+{% hint style="warning" %}
+On certain cloud service providers, such as Digital Ocean, a glitch with journald prevents it from correctly reading logs from other services. To address this issue, execute the command below:
+
+`sudo systemctl restart systemd-journald.service`
+{% endhint %}
 
 At this point, you will need to wait for your node to catch up with the latest block. You can find the latest block on our [Block Explorer.](https://blocks-perseverance.chainflip.io)
 
@@ -29,7 +34,7 @@ To view the live logs for the validator software, check on them via `journalctl`
 Check the Node:
 
 ```bash
-journalctl -f -u chainflip-node.service
+sudo journalctl -f -u chainflip-node.service
 ```
 
 At the start, you should see that your node is synchronising to the network, something like this:
@@ -87,13 +92,13 @@ sudo systemctl start chainflip-engine
 To check on the service, we use `status`.
 
 ```bash
-systemctl status chainflip-engine
+sudo systemctl status chainflip-engine
 ```
 
 Check the engine logs:
 
 ```bash
-journalctl -f -u chainflip-engine.service
+sudo journalctl -f -u chainflip-engine.service
 ```
 
 You should see some output that looks like this:
